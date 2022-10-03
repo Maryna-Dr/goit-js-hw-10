@@ -28,7 +28,7 @@ ul {
   margin-bottom: 20px;
 }
 
-.country-basic {
+.country {
   display: flex;
   gap: 5px;
   align-items: center;
@@ -39,7 +39,7 @@ ul {
   margin: 0;
 }
 
-.name-bold {
+.country-name.info {
   font-weight: 700;
   font-size: 28px;
 }

@@ -38,7 +38,6 @@ function onInputFieldChange(e) {
 function changeInterface(countries) {
   if (countries.length > 10) {
     Notify.info('Too many matches found. Please enter a more specific name.');
-
     return;
   }
 
@@ -56,26 +55,34 @@ function changeInterface(countries) {
 
   if (countries.length === 1) {
     refs.countryList.innerHTML = '';
+    refs.countryInfo.innerHTML = '';
     const { name, capital, population, flags, languages } = countries[0];
 
-    const markup =
-      getCountryListMarkup(flags.svg, name, 'name-bold') +
-      addMarkupToCountryInfo(capital, population, languages);
+    const markup = getCountryInfoMarkup(
+      flags.svg,
+      name,
+      capital,
+      population,
+      languages
+    );
 
     refs.countryInfo.insertAdjacentHTML('beforeend', markup);
     return;
   }
 }
 
-function getCountryListMarkup(flag, name, className) {
-  return `<li class="country-basic"> 
+function getCountryListMarkup(flag, name) {
+  return `<li class="country"> 
         <img src="${flag}" alt="Country flag" width=25px height=auto>
-    <p class="country-name ${className}">${name.official}</p></li>`;
+    <p class="country-name">${name.official}</p></li>`;
 }
 
-function addMarkupToCountryInfo(capital, population, language) {
+function getCountryInfoMarkup(flag, name, capital, population, language) {
   const languages = Object.values(language).join(', ');
-  return `<ul>
+  return `<p class="country"> 
+        <img src="${flag}" alt="Country flag" width=25px height=auto>
+    <span class="country-name info">${name.official}</span></p>
+  <ul>
         <li class="country-details"><span class="detail-bold">Capital:</span> ${capital}</li>
         <li class="country-details"><span class="detail-bold">Population:</span> ${population}</li>
         <li class="country-details"><span class="detail-bold">Languages:</span> ${languages}</li>
